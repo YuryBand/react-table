@@ -46,7 +46,7 @@ class MainTab extends React.Component {
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.quickFilter !== this.props.quickFilter) {
-			this.setState({data: myData.filter(el => el.age !== this.props.quickFilter)})
+			this.setState({data: myData.filter(el => el.age === this.props.quickFilter)})
 		}
 	}
 
@@ -64,7 +64,7 @@ class MainTab extends React.Component {
 				<ReactTable 
 					data={this.state.data}
 					columns={columns}
-					resolveData={data => this.state.data.filter(el => el.age !== this.props.quickFilter)}
+					resolveData={data => quickFilter !== '' ? this.state.data.filter(el => el.age === this.props.quickFilter): myData}
 				/>
 			</Fragment>
 			

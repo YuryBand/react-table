@@ -6,7 +6,7 @@ export default class MainPage extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			quickFilter: 3,
+			quickFilter: '',
 			isShown: true
 		}
 		this.changeFilter = this.changeFilter.bind(this);
