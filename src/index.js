@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import {render} from 'react-dom';
-import MainTab from './components/MainTab';
+import MainPage from './components/MainPage';
 
 import "./styles/index.css"
 
 const App = () => 
 (<Fragment>
-	<MainTab/>
+	<MainPage/>
 </Fragment>)
 
 render(<App/>, document.getElementById('app'));

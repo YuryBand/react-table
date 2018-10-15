@@ -36,32 +36,35 @@ const columns = [
 	},
 ]
 
-function change(myData) {
-	return myData.filter(el => el.age !== 3);
-}
-
-console.log(change(myData))
-
-
 class MainTab extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			data: myData,
-			quickFilter: '',
 		}
 	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.quickFilter !== this.props.quickFilter) {
+			this.setState({data: myData.filter(el => el.age !== this.props.quickFilter)})
+		}
+	}
+
+
+
 	render() {
-		console.log(`Filter: ${this.state.quickFilter}`);
+		const { quickFilter, changeFilter } = this.props;
+
+		console.log(`Filter: ${this.props.quickFilter}`);
 		return (
 			<Fragment>
-				<button onClick={() => {this.setState({data: myData.filter(el => el.age !== 3)})}}>3</button>
-				<button onClick={() => {this.setState({data: myData.filter(el => el.age !== 38)})}}>38</button>
-				<button onClick={() => {this.setState({data: myData.filter(el => el.age !== '')})}}>All</button>
+				<button onClick={() => {changeFilter(3)}}>3</button>
+				<button onClick={() => {changeFilter(38)}}>38</button>
+				<button onClick={() => {changeFilter('')}}>All</button>
 				<ReactTable 
 					data={this.state.data}
 					columns={columns}
-					resolveData={data => this.state.data.filter(el => el.age !== this.state.quickFilter)}
+					resolveData={data => this.state.data.filter(el => el.age !== this.props.quickFilter)}
 				/>
 			</Fragment>
 			
